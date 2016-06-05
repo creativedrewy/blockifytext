@@ -1,0 +1,8 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "amd",
+        "sourceMap": false,
+        "outFile": "js/bin/site.js"
+    }
+}
