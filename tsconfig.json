@@ -3,6 +3,6 @@
         "target": "es5",
         "module": "amd",
         "sourceMap": false,
-        "outFile": "js/bin/site.js"
+        "outFile": "app/js/bin/site.js"
     }
 }
