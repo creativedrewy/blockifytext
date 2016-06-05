@@ -4,5 +4,9 @@
         "module": "amd",
         "sourceMap": false,
         "outFile": "app/js/bin/site.js"
-    }
+    },
+    "exclude": [
+        "node_modules",
+        "typings"
+    ]
 }

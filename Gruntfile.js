@@ -20,16 +20,17 @@ module.exports = function (grunt) {
         //         livereload: true
         //     }
         },
-        // ts: {
-        //     options: {
-        //         fast: 'never',
-        //     },
-        //     default: {
-        //         tsconfig: true
-        //     }
-        // }
+        ts: {
+            options: {
+                fast: 'never',
+            },
+            default: {
+                tsconfig: true
+            }
+        }
     });
     
+    grunt.loadNpmTasks("grunt-ts");
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-watch');
     
@@ -40,5 +41,6 @@ module.exports = function (grunt) {
         ]);
     });
     
-    grunt.registerTask("default", ['server']);
+    //grunt.registerTask("default", ['ts', 'server']);
+    grunt.registerTask("default", ['ts']);
 };
