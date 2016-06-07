@@ -1,5 +1,6 @@
 import * as _three from 'three';
 import {Block1x1} from 'mesh/Block1x1'
+import {DataLoader} from 'DataLoader'
 
 /**
  * 
@@ -22,6 +23,10 @@ export class BlockifyText {
         document.body.appendChild(this.mainRenderer.domElement);
         
         this.setupLights();
+
+        var testLoader = new DataLoader();
+        testLoader.loadBlock3dData()
+            .subscribe();
 
         var blockMeshLoader = new _three.JSONLoader();
         blockMeshLoader.load('assets/block.json', (geometry, materials) => {
