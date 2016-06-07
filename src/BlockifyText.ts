@@ -26,6 +26,13 @@ export class BlockifyText {
             legoMesh.rotation.x = Math.PI / 2;
 
             this.mainScene.add(legoMesh);
+            
+            var fontLoader = new _three.XHRLoader(_three.DefaultLoadingManager);
+            fontLoader.load('assets/04b25_font.json', (res) => {
+                var fontData = JSON.parse(res);
+                
+                
+            })
         })
     }
 
