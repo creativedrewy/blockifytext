@@ -14,11 +14,11 @@ module.exports = function (grunt) {
             }
         },
         watch: {
-        //     files: ['**/*.ts'],
-        //     tasks: [ ],
-        //     options: {
-        //         livereload: true
-        //     }
+            files: ['**/*.ts', '**/*.html'],
+            tasks: [ 'ts' ],
+            options: {
+                livereload: true
+            }
         },
         ts: {
             options: {
@@ -41,6 +41,6 @@ module.exports = function (grunt) {
         ]);
     });
     
-    //grunt.registerTask("default", ['ts', 'server']);
-    grunt.registerTask("default", ['ts']);
+    grunt.registerTask("default", ['ts', 'server']);
+    //grunt.registerTask("default", ['ts']);
 };
