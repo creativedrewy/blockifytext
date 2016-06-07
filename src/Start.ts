@@ -1,7 +1,9 @@
+import * as THREE from 'three';
+
 class Start {
     
-    public static main(): number {
-        return 0;
+    public static main() {
+        var scene = new THREE.Scene();
     }
     
 }

@@ -6,7 +6,6 @@
         "outFile": "app/js/bin/site.js"
     },
     "exclude": [
-        "node_modules",
-        "typings"
+        "node_modules"
     ]
 }
