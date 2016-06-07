@@ -1,4 +1,4 @@
-require({ baseUrl: 'js' }, [ 'bin/BlockifyText' ], function(Main) {
-    var blockifier = new Main.BlockifyText();
+require({ }, [ 'BlockifyText' ], function(lib) {
+    var blockifier = new lib.BlockifyText();
     blockifier.run();
-});
+}); 

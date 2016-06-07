@@ -3,7 +3,7 @@
         "target": "es5",
         "module": "amd",
         "sourceMap": false,
-        "outDir": "app/js/bin"
+        "outFile": "app/js/bin/site.js"
     },
     "exclude": [
         "node_modules"
