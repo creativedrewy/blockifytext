@@ -16,7 +16,7 @@ export class BlockifyText {
         this.mainScene = new _three.Scene();
 
         this.mainCamera = new _three.PerspectiveCamera(75, this.width / this.height, 1, 10000);
-        this.mainCamera.position.z = 200;
+        this.mainCamera.position.z = 100;
         this.mainRenderer = new _three.WebGLRenderer();
         this.mainRenderer.setSize(this.width, this.height);
         document.body.appendChild(this.mainRenderer.domElement);
@@ -26,14 +26,32 @@ export class BlockifyText {
         var blockMeshLoader = new _three.JSONLoader();
         blockMeshLoader.load('assets/block.json', (geometry, materials) => {
             var singleBlock = new Block1x1(geometry);
-
-            this.mainScene.add(singleBlock);
+            //this.mainScene.add(singleBlock);
             
             var fontLoader = new _three.XHRLoader(_three.DefaultLoadingManager);
             fontLoader.load('assets/04b25_font.json', (res) => {
                 var fontData = JSON.parse(res);
                 
+                var letterProps = fontData.b;   //Play around with data for letter a
+                var letterWidth = letterProps.w;
                 
+                var letterDisp = "";
+                for (var i = 0; i < letterProps.px.length; i++) {
+                    var currentLine = "";
+                    for (var j = 0; j < letterProps.px[i].length; j++) {
+                        currentLine += letterProps.px[i][j] == 0 ? ":" : "#";
+
+                        if (letterProps.px[i][j] == 1) {
+                            var pxBlock = new Block1x1(geometry);
+                            pxBlock.position.x = j * 10;
+                            pxBlock.position.y = i * -10;
+
+                            this.mainScene.add(pxBlock);
+                        }
+                    }
+                    
+                    console.log(currentLine);
+                }
             })
         })
     }
