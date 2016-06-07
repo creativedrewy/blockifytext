@@ -1,6 +1,6 @@
 require({ 
     paths: {
-        'three': "vendor/three"
+        'three': "vendor/threejs/three"
     }
 }, [ 'BlockifyText' ], function(lib) {
     var blockifier = new lib.BlockifyText();

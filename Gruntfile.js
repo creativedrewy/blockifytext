@@ -27,9 +27,23 @@ module.exports = function (grunt) {
             default: {
                 tsconfig: true
             }
+        },
+        bowercopy: {
+            libs: {
+                options: {
+                    destPrefix: "app/js/vendor/",
+                    clean: true
+                },
+                files: {
+                    requirejs: "requirejs/require.js",
+                    threejs: "three.js/three.js",
+                    rxjs: "rxjs/dist/rx.all.js"
+                }
+            }
         }
     });
     
+    grunt.loadNpmTasks("grunt-bowercopy")
     grunt.loadNpmTasks("grunt-ts");
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-watch');
@@ -41,6 +55,5 @@ module.exports = function (grunt) {
         ]);
     });
     
-    grunt.registerTask("default", ['ts', 'server']);
-    //grunt.registerTask("default", ['ts']);
+    grunt.registerTask("default", ['bowercopy', 'ts', 'server']);
 };

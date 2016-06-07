@@ -1,4 +1,8 @@
 {
   "name": "blockifytext",
-  "dependencies": {}
+  "dependencies": {},
+  "globalDependencies": {
+    "rx": "npm:rx/ts/rx.all.d.ts",
+    "three": "registry:dt/three#0.0.0+20160602140506"
+  }
 }

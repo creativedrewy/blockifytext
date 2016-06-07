@@ -16,7 +16,7 @@ export class BlockifyText {
         this.mainScene = new _three.Scene();
 
         this.mainCamera = new _three.PerspectiveCamera(75, this.width / this.height, 1, 10000);
-        this.mainCamera.position.z = 100;
+        this.mainCamera.position.z = 150;
         this.mainRenderer = new _three.WebGLRenderer();
         this.mainRenderer.setSize(this.width, this.height);
         document.body.appendChild(this.mainRenderer.domElement);

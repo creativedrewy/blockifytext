@@ -1,0 +1,10 @@
+{
+  "name": "blockifytext",
+  "description": "",
+  "private": true,
+  "dependencies": {
+    "rxjs": "^4.1.0",
+    "three.js": "^0.76.0",
+    "requirejs": "^2.2.0"
+  }
+}
