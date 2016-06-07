@@ -1,3 +1,4 @@
 require({ }, [ 'bin/BlockifyText' ], function(Main) {
-    new Main.BlockifyText();
+    var blockifier = new Main.BlockifyText();
+    blockifier.run();
 });
