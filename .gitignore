@@ -1,3 +1,5 @@
 app/js/bin/
 node_modules/
 typings/
+app/js/vendor
+app/js/three.js
