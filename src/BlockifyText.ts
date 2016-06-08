@@ -1,9 +1,11 @@
 import * as _three from 'three';
+import {Observable} from 'rx';
 import {Block1x1} from 'mesh/Block1x1'
 import {BlockMeshLoader} from 'mesh/BlockMeshLoader'
+import {Block3dFontService} from 'service/Block3dFontService' 
 
 /**
- * 
+ * Main class for application
  */
 export class BlockifyText {
     private width = 600;
@@ -24,34 +26,14 @@ export class BlockifyText {
         
         this.setupLights();
 
-        var testLoader = new BlockMeshLoader();
-        testLoader.loadBlock3dData()
+        var meshLoader = new BlockMeshLoader();
+        var fontService = new Block3dFontService();
+
+        Observable.zip(meshLoader.loadBlock3dData(), fontService.loadFontData())
             .subscribe((result) => {
-                var fontLoader = new _three.XHRLoader(_three.DefaultLoadingManager);
-                fontLoader.load('assets/04b25_font.json', (res) => {
-                    var fontData = JSON.parse(res);
-                    
-                    var letterProps = fontData.b;   //Play around with data for letter a
-                    var letterWidth = letterProps.w;
-                    
-                    var letterDisp = "";
-                    for (var i = 0; i < letterProps.px.length; i++) {
-                        var currentLine = "";
-                        for (var j = 0; j < letterProps.px[i].length; j++) {
-                            currentLine += letterProps.px[i][j] == 0 ? ":" : "#";
+                var letterA = fontService.generate3dLetter("a");
 
-                            if (letterProps.px[i][j] == 1) {
-                                var pxBlock = new Block1x1();
-                                pxBlock.position.x = j * 10;
-                                pxBlock.position.y = i * -10;
-
-                                this.mainScene.add(pxBlock);
-                            }
-                        }
-                        
-                        console.log(currentLine);
-                    }
-                })
+                this.mainScene.add(letterA);
             });
     }
 
