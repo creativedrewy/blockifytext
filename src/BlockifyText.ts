@@ -1,6 +1,6 @@
 import * as _three from 'three';
 import {Block1x1} from 'mesh/Block1x1'
-import {DataLoader} from 'DataLoader'
+import {BlockMeshLoader} from 'mesh/BlockMeshLoader'
 
 /**
  * 
@@ -24,41 +24,35 @@ export class BlockifyText {
         
         this.setupLights();
 
-        var testLoader = new DataLoader();
+        var testLoader = new BlockMeshLoader();
         testLoader.loadBlock3dData()
-            .subscribe();
-
-        var blockMeshLoader = new _three.JSONLoader();
-        blockMeshLoader.load('assets/block.json', (geometry, materials) => {
-            var singleBlock = new Block1x1(geometry);
-            //this.mainScene.add(singleBlock);
-            
-            var fontLoader = new _three.XHRLoader(_three.DefaultLoadingManager);
-            fontLoader.load('assets/04b25_font.json', (res) => {
-                var fontData = JSON.parse(res);
-                
-                var letterProps = fontData.b;   //Play around with data for letter a
-                var letterWidth = letterProps.w;
-                
-                var letterDisp = "";
-                for (var i = 0; i < letterProps.px.length; i++) {
-                    var currentLine = "";
-                    for (var j = 0; j < letterProps.px[i].length; j++) {
-                        currentLine += letterProps.px[i][j] == 0 ? ":" : "#";
-
-                        if (letterProps.px[i][j] == 1) {
-                            var pxBlock = new Block1x1(geometry);
-                            pxBlock.position.x = j * 10;
-                            pxBlock.position.y = i * -10;
-
-                            this.mainScene.add(pxBlock);
-                        }
-                    }
+            .subscribe((result) => {
+                var fontLoader = new _three.XHRLoader(_three.DefaultLoadingManager);
+                fontLoader.load('assets/04b25_font.json', (res) => {
+                    var fontData = JSON.parse(res);
                     
-                    console.log(currentLine);
-                }
-            })
-        })
+                    var letterProps = fontData.b;   //Play around with data for letter a
+                    var letterWidth = letterProps.w;
+                    
+                    var letterDisp = "";
+                    for (var i = 0; i < letterProps.px.length; i++) {
+                        var currentLine = "";
+                        for (var j = 0; j < letterProps.px[i].length; j++) {
+                            currentLine += letterProps.px[i][j] == 0 ? ":" : "#";
+
+                            if (letterProps.px[i][j] == 1) {
+                                var pxBlock = new Block1x1();
+                                pxBlock.position.x = j * 10;
+                                pxBlock.position.y = i * -10;
+
+                                this.mainScene.add(pxBlock);
+                            }
+                        }
+                        
+                        console.log(currentLine);
+                    }
+                })
+            });
     }
 
     setupLights() {
