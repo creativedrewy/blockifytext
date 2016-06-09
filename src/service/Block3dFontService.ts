@@ -1,6 +1,7 @@
 import * as _three from 'three';
 import {Observable} from 'rx';
 import {Block1x1} from '../mesh/Block1x1'
+import {Letter3d} from '../object3d/Letter3d'
 
 /**
  * Encapsulates business logic related to a 3d font
@@ -24,31 +25,23 @@ export class Block3dFontService {
     /**
      * Generate a 3d letter with all component blocks
      */
-    generate3dLetter(letter: string): _three.Object3D {
-        var container = new _three.Object3D;
-
-        var letterProps: any = this.letterData[letter];
-        var letterWidth = letterProps.w;
-        var letterSizeW = letterProps.w * 10;
-        var letterSizeH = letterProps.px.length * 10;
+    generate3dLetter(letter: string): Letter3d {
+        var letter3d = new Letter3d(this.letterData[letter]);
         
         var letterDisp = "";
-        for (var i = 0; i < letterProps.px.length; i++) {
-            var currentLine = "";
-            for (var j = 0; j < letterProps.px[i].length; j++) {
-                currentLine += letterProps.px[i][j] == 0 ? ":" : "#";
-
-                if (letterProps.px[i][j] == 1) {
+        for (var i = 0; i < letter3d.blockHeight; i++) {
+            for (var j = 0; j < letter3d.blockWidth; j++) {
+                if (letter3d.getBlockSrc(i, j) == 1) {
                     var pxBlock = new Block1x1();
-                    pxBlock.position.x = -(letterSizeW / 2) + (j * 10);
-                    pxBlock.position.y = (letterSizeH / 2) - (i * 10);
+                    pxBlock.position.x = -(letter3d.pxWidth / 2) + (j * 10);
+                    pxBlock.position.y = (letter3d.pxHeight / 2) - (i * 10);
 
-                    container.add(pxBlock);
+                    letter3d.add(pxBlock);
                 }
             }
         }
 
-        return container;
+        return letter3d;
     }
 
     generate3dWord(word: string): _three.Object3D {
@@ -59,12 +52,11 @@ export class Block3dFontService {
         var xOffset = 0;
         for (var i = 0; i < word.length; i++) {
             var letterChar = word[i];
-            var current3dLetter: _three.Object3D;
 
             if (letterChar == " ") {
                 xOffset += spaceCharWidth + letterSpacing;
             } else {
-                current3dLetter = this.generate3dLetter(letterChar);
+                var current3dLetter = this.generate3dLetter(letterChar);
                 current3dLetter.position.x = xOffset;
 
                 
