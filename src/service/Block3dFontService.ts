@@ -36,7 +36,7 @@ export class Block3dFontService {
                     pxBlock.position.x = j * 10;
                     pxBlock.position.y = (letter3d.pxHeight / 2) - (i * 10);
 
-                    letter3d.add(pxBlock);
+                    letter3d.addBlock(pxBlock)
                 }
             }
         }
