@@ -44,6 +44,9 @@ export class Block3dFontService {
         return letter3d;
     }
 
+    /**
+     * Generate a 3d word with all of the 3d letters as one object
+     */
     generate3dWord(word: string): _three.Object3D {
         var letterSpacing = 10;
         var spaceCharWidth = 50;
@@ -58,8 +61,9 @@ export class Block3dFontService {
             } else {
                 var current3dLetter = this.generate3dLetter(letterChar);
                 current3dLetter.position.x = xOffset;
+                wordContainer.add(current3dLetter);
 
-                
+                xOffset += current3dLetter.pxWidth + letterSpacing;
             }
         }
 

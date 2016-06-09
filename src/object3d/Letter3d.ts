@@ -13,7 +13,7 @@ export class Letter3d extends _three.Object3D {
     public get pxHeight(): number { return this.blockHeight * 10; }
 
     /**
-     * 
+     * Get the source data for a single position in the letter source data 
      */
     public getBlockSrc(x: number, y: number): number {
         return parseInt(this.propsData.px[x][y]);
