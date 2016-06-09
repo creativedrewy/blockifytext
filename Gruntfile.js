@@ -56,4 +56,5 @@ module.exports = function (grunt) {
     });
     
     grunt.registerTask("default", ['bowercopy', 'ts', 'server']);
+    grunt.registerTask("nobower", ['ts', 'server']);
 };
