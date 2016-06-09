@@ -21,7 +21,7 @@ export class BlockifyText {
         this.mainScene = new _three.Scene();
 
         this.mainCamera = new _three.PerspectiveCamera(75, this.width / this.height, 1, 10000);
-        this.mainCamera.position.z = 150;
+        this.mainCamera.position.z = 300;
         this.mainRenderer = new _three.WebGLRenderer();
         this.mainRenderer.setSize(this.width, this.height);
         document.body.appendChild(this.mainRenderer.domElement);
@@ -33,9 +33,13 @@ export class BlockifyText {
 
         Observable.zip(meshLoader.loadBlock3dData(), fontService.loadFontData(BlockifyText.FONT_04b25))
             .subscribe((result) => {
-                var word = fontService.generate3dWord("creative")
+                var word = fontService.generate3dWord("creativedrewy")
 
                 this.mainScene.add(word);
+
+                // setInterval(() => {
+                //     word.rotation.x += 0.01;
+                // }, 33);
             });
     }
 

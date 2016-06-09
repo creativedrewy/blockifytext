@@ -45,29 +45,32 @@ export class Block3dFontService {
     }
 
     /**
-     * Generate a 3d word with all of the 3d letters as one object
+     * Generate a 3d string with all of the 3d letters as one object
      */
-    generate3dWord(word: string): _three.Object3D {
+    generate3dWord(text: string): _three.Object3D {
         var letterSpacing = 10;
         var spaceCharWidth = 50;
-        var wordContainer = new _three.Object3D();
+        var wordWidth = 0;
+        var textContainer = new _three.Object3D();
 
-        var xOffset = 0;
-        for (var i = 0; i < word.length; i++) {
-            var letterChar = word[i];
+        Observable.from(text).forEach(letter => { wordWidth += this.generate3dLetter(letter).pxWidth + letterSpacing; });
+
+        var xOffset = -(wordWidth / 2);
+        for (var i = 0; i < text.length; i++) {
+            var letterChar = text[i];
 
             if (letterChar == " ") {
                 xOffset += spaceCharWidth + letterSpacing;
             } else {
                 var current3dLetter = this.generate3dLetter(letterChar);
                 current3dLetter.position.x = xOffset;
-                wordContainer.add(current3dLetter);
+                textContainer.add(current3dLetter);
 
                 xOffset += current3dLetter.pxWidth + letterSpacing;
             }
         }
 
-        return wordContainer;
+        return textContainer;
     }
 
 }
