@@ -10,7 +10,7 @@ import {Block3dFontService} from 'service/Block3dFontService'
 export class BlockifyText {
     private static FONT_04b25 = 'assets/04b25_font.json';
 
-    private width = 600;
+    private width = 900;
     private height = 400;
 
     private mainRenderer:_three.WebGLRenderer;

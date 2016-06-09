@@ -31,7 +31,7 @@ export class Block3dFontService {
         var letterWidth = letterProps.w;
         var letterSizeW = letterProps.w * 10;
         var letterSizeH = letterProps.px.length * 10;
-                    
+        
         var letterDisp = "";
         for (var i = 0; i < letterProps.px.length; i++) {
             var currentLine = "";
@@ -46,11 +46,32 @@ export class Block3dFontService {
                     container.add(pxBlock);
                 }
             }
-            
-            console.log(i + " " + currentLine);
         }
 
         return container;
+    }
+
+    generate3dWord(word: string): _three.Object3D {
+        var letterSpacing = 10;
+        var spaceCharWidth = 50;
+        var wordContainer = new _three.Object3D();
+
+        var xOffset = 0;
+        for (var i = 0; i < word.length; i++) {
+            var letterChar = word[i];
+            var current3dLetter: _three.Object3D;
+
+            if (letterChar == " ") {
+                xOffset += spaceCharWidth + letterSpacing;
+            } else {
+                current3dLetter = this.generate3dLetter(letterChar);
+                current3dLetter.position.x = xOffset;
+
+                
+            }
+        }
+
+        return wordContainer;
     }
 
 }
