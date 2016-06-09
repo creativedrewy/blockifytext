@@ -11,10 +11,10 @@ export class Block3dFontService {
     /**
      * Load the source data for a font
      */
-    loadFontData(): Observable<boolean> {
+    loadFontData(fontJson: string): Observable<boolean> {
         return Observable.create<boolean>((subscriber) => {
             var fontLoader = new _three.XHRLoader(_three.DefaultLoadingManager);
-            fontLoader.load('assets/04b25_font.json', (res) => {
+            fontLoader.load(fontJson, (res) => {
                 this.letterData = JSON.parse(res);
                 subscriber.onNext(true);
             });
