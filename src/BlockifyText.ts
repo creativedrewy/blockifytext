@@ -37,24 +37,33 @@ export class BlockifyText {
 
                 this.mainScene.add(word);
 
-                // setInterval(() => {
-                //     word.rotation.x += 0.01;
-                // }, 33);
+                //word.rotation.x = -.4;
+                //setInterval(() => {
+                //    word.rotation.x += 0.01;
+                //}, 33);
             });
     }
 
     setupLights() {
-        var spotLight = new _three.SpotLight(0xffffff);
-        spotLight.position.set(50, 50, 50);
-        spotLight.castShadow = true;
-        spotLight.intensity = 1.0;
-        this.mainScene.add(spotLight);
+        var light1 = new _three.PointLight(0xffffff, 1.0);
+        light1.position.set(300, 200, -300);
+        light1.castShadow = true;
+        this.mainScene.add(light1);
 
-        var spotLight = new _three.SpotLight(0xffffff);
-        spotLight.position.set(-50, -50, 50);
-        spotLight.castShadow = true;
-        spotLight.intensity = 1.0;
-        this.mainScene.add(spotLight);
+        var light2 = new _three.PointLight(0xffffff, 1.0);
+        light2.position.set(-300, -200, -300);
+        light2.castShadow = true;
+        this.mainScene.add(light2);
+
+        var light3 = new _three.PointLight(0xffffff, 1.0);
+        light3.position.set(-300, 200, 300);
+        light3.castShadow = true;
+        this.mainScene.add(light3);
+
+        var light4 = new _three.PointLight(0xffffff, 1.0);
+        light4.position.set(300, -200, 300);
+        light4.castShadow = true;
+        this.mainScene.add(light4);
     }
 
     run() {
