@@ -29,6 +29,8 @@ export class Block3dFontService {
 
         var letterProps: any = this.letterData[letter];
         var letterWidth = letterProps.w;
+        var letterSizeW = letterProps.w * 10;
+        var letterSizeH = letterProps.px.length * 10;
                     
         var letterDisp = "";
         for (var i = 0; i < letterProps.px.length; i++) {
@@ -38,14 +40,14 @@ export class Block3dFontService {
 
                 if (letterProps.px[i][j] == 1) {
                     var pxBlock = new Block1x1();
-                    pxBlock.position.x = j * 10;
-                    pxBlock.position.y = i * -10;
+                    pxBlock.position.x = -(letterSizeW / 2) + (j * 10);
+                    pxBlock.position.y = (letterSizeH / 2) - (i * 10);
 
                     container.add(pxBlock);
                 }
             }
             
-            console.log(currentLine);
+            console.log(i + " " + currentLine);
         }
 
         return container;

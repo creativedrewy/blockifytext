@@ -31,9 +31,9 @@ export class BlockifyText {
 
         Observable.zip(meshLoader.loadBlock3dData(), fontService.loadFontData())
             .subscribe((result) => {
-                var letterA = fontService.generate3dLetter("a");
+                var letter = fontService.generate3dLetter("a");
 
-                this.mainScene.add(letterA);
+                this.mainScene.add(letter);
             });
     }
 
