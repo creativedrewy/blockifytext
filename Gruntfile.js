@@ -37,7 +37,8 @@ module.exports = function (grunt) {
                 files: {
                     requirejs: "requirejs/require.js",
                     threejs: "three.js/three.js",
-                    rxjs: "rxjs/dist/rx.all.js"
+                    rxjs: "rxjs/dist/rx.all.js",
+                    gsap: "gsap/src/minified/TweenMax.min.js"
                 }
             }
         }
