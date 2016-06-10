@@ -39,9 +39,12 @@ export class BlockifyText {
                 word.rotation.x = -Math.PI / 22;
                 word.rotation.y = -Math.PI / 40;
                 word.rotation.z = -Math.PI / 40;
-                TweenMax.to(word.rotation, 7, { x: Math.PI / 22, repeat: -1, yoyo: true, ease: Quad.easeInOut })
-                TweenMax.to(word.rotation, 7, { z: Math.PI / 40, repeat: -1, yoyo: true, ease: Quad.easeInOut })
-                TweenMax.to(word.rotation, 7, { y: Math.PI / 40, repeat: -1, yoyo: true, ease: Quad.easeInOut })
+
+                var timeline = new TimelineMax({ repeat: -1, yoyo: true });
+                timeline.add(TweenLite.to(word.rotation, 7, { x: Math.PI / 22, z: Math.PI / 40, ease: Quad.easeInOut }));
+                timeline.add(TweenLite.to(word.rotation, 7, { y: Math.PI / 40, ease: Quad.easeInOut }));
+                timeline.add(TweenLite.to(word.rotation, 7, { x: -Math.PI / 22, z: -Math.PI / 40, ease: Quad.easeInOut }));
+                timeline.add(TweenLite.to(word.rotation, 7, { y: -Math.PI / 40, ease: Quad.easeInOut }));
             });
     }
 
