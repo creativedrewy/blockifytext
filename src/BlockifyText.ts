@@ -37,26 +37,25 @@ export class BlockifyText {
                 this.wordMain = fontService.generate3dWord("creativedrewy");
                 this.sceneMain.add(this.wordMain);
 
-                //this.animateWord();
+                this.animateWord();
             });
     }
 
     animateWord() {
+        var animDuration = 3;
+
         this.wordMain.rotation.x = -Math.PI / 22;
         this.wordMain.rotation.y = -Math.PI / 40;
         this.wordMain.rotation.z = -Math.PI / 40;
 
         var timeline = new TimelineMax({ repeat: -1 });
-        timeline.add(TweenLite.to(this.wordMain.rotation, 7, { x: Math.PI / 22, z: Math.PI / 40, ease: Quad.easeInOut }));
-        timeline.add(TweenLite.to(this.wordMain.rotation, 7, { y: Math.PI / 40, ease: Quad.easeInOut }));
-        timeline.add(TweenLite.to(this.wordMain.rotation, 7, { x: -Math.PI / 22, z: -Math.PI / 40, ease: Quad.easeInOut }));
-        timeline.add(TweenLite.to(this.wordMain.rotation, 7, { y: -Math.PI / 40, ease: Quad.easeInOut }));
+        timeline.add(TweenLite.to(this.wordMain.rotation, animDuration, { x: Math.PI / 22, z: Math.PI / 40, ease: Quad.easeInOut }));
+        timeline.add(TweenLite.to(this.wordMain.rotation, animDuration, { y: Math.PI / 40, ease: Quad.easeInOut }));
+        timeline.add(TweenLite.to(this.wordMain.rotation, animDuration, { x: -Math.PI / 22, z: -Math.PI / 40, ease: Quad.easeInOut }));
+        timeline.add(TweenLite.to(this.wordMain.rotation, animDuration, { y: -Math.PI / 40, ease: Quad.easeInOut }));
     }
 
     setupLights() {
-        // var ambient = new _three.AmbientLight(0xffffff, 0.2);
-        // this.sceneMain.add(ambient);
-
         var light1 = new _three.PointLight(0xffffff, 1.0);
         light1.position.set(300, 200, -300);
         light1.castShadow = true;
