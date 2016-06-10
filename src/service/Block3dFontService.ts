@@ -8,6 +8,7 @@ import {Letter3d} from '../object3d/Letter3d'
  */
 export class Block3dFontService { 
     private letterData: any;
+    private blockColors: Array<number> = [ 0xfec400, 0xe76318, 0xde000d, 0xde378b, 0x0057a8, 0xffff99, 0xee9ec4, 0x87c0ea, 0xf49b00, 0x9c006b, 0x478cc6 ];
 
     /**
      * Load the source data for a font
@@ -25,14 +26,14 @@ export class Block3dFontService {
     /**
      * Generate a 3d letter with all component blocks
      */
-    generate3dLetter(letter: string): Letter3d {
+    generate3dLetter(letter: string, color: number = 0xff0000): Letter3d {
         var letter3d = new Letter3d(this.letterData[letter]);
         
         var letterDisp = "";
         for (var i = 0; i < letter3d.blockHeight; i++) {
             for (var j = 0; j < letter3d.blockWidth; j++) {
                 if (letter3d.getBlockSrc(i, j) == 1) {
-                    var pxBlock = new Block1x1();
+                    var pxBlock = new Block1x1(color);
                     pxBlock.position.x = j * 10;
                     pxBlock.position.y = (letter3d.pxHeight / 2) - (i * 10);
 
@@ -62,7 +63,9 @@ export class Block3dFontService {
             if (letterChar == " ") {
                 xOffset += spaceCharWidth + letterSpacing;
             } else {
-                var current3dLetter = this.generate3dLetter(letterChar);
+                var colorIndex = Math.round((Math.random() * this.blockColors.length - 1));
+
+                var current3dLetter = this.generate3dLetter(letterChar, this.blockColors[colorIndex]);
                 current3dLetter.position.x = xOffset;
                 textContainer.add(current3dLetter);
 
