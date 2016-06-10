@@ -22,7 +22,7 @@ export class BlockifyText {
 
         this.mainCamera = new _three.PerspectiveCamera(75, this.width / this.height, 1, 10000);
         this.mainCamera.position.z = 325;
-        this.mainRenderer = new _three.WebGLRenderer();
+        this.mainRenderer = new _three.WebGLRenderer({ antialias: true });
         this.mainRenderer.setSize(this.width, this.height);
         document.body.appendChild(this.mainRenderer.domElement);
         
@@ -36,7 +36,12 @@ export class BlockifyText {
                 var word = fontService.generate3dWord("creativedrewy");
                 this.mainScene.add(word);
 
-                //TweenMax.to(word.rotation, 3, { z: Math.PI / 20 })
+                word.rotation.x = -Math.PI / 22;
+                word.rotation.y = -Math.PI / 40;
+                word.rotation.z = -Math.PI / 40;
+                TweenMax.to(word.rotation, 7, { x: Math.PI / 22, repeat: -1, yoyo: true, ease: Quad.easeInOut })
+                TweenMax.to(word.rotation, 7, { z: Math.PI / 40, repeat: -1, yoyo: true, ease: Quad.easeInOut })
+                TweenMax.to(word.rotation, 7, { y: Math.PI / 40, repeat: -1, yoyo: true, ease: Quad.easeInOut })
             });
     }
 
