@@ -22,7 +22,7 @@ export class BlockifyText {
         this.sceneMain = new _three.Scene();
 
         this.cameraMain = new _three.PerspectiveCamera(75, this.width / this.height, 1, 10000);
-        this.cameraMain.position.z = 325;
+        this.cameraMain.position.z = 300;
         this.rendererMain = new _three.WebGLRenderer({ antialias: true });
         this.rendererMain.setSize(this.width, this.height);
         document.body.appendChild(this.rendererMain.domElement);
@@ -57,24 +57,29 @@ export class BlockifyText {
 
     setupLights() {
         var light1 = new _three.PointLight(0xffffff, 1.0);
-        light1.position.set(300, 200, -300);
+        light1.position.set(600, 400, 300);
         light1.castShadow = true;
         this.sceneMain.add(light1);
 
         var light2 = new _three.PointLight(0xffffff, 1.0);
-        light2.position.set(-300, -200, -300);
+        light2.position.set(600, -400, 300);
         light2.castShadow = true;
         this.sceneMain.add(light2);
 
         var light3 = new _three.PointLight(0xffffff, 1.0);
-        light3.position.set(-300, 200, 300);
+        light3.position.set(-600, -400, 300);
         light3.castShadow = true;
         this.sceneMain.add(light3);
 
         var light4 = new _three.PointLight(0xffffff, 1.0);
-        light4.position.set(300, -200, 300);
+        light4.position.set(-600, 400, 300);
         light4.castShadow = true;
         this.sceneMain.add(light4);
+
+        this.sceneMain.add(new _three.PointLightHelper(light1, 30));
+        this.sceneMain.add(new _three.PointLightHelper(light2, 30));
+        this.sceneMain.add(new _three.PointLightHelper(light3, 30));
+        this.sceneMain.add(new _three.PointLightHelper(light4, 30));
     }
 
     run() {
