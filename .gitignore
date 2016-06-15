@@ -3,3 +3,5 @@ node_modules/
 typings/
 app/js/vendor
 bower_components/
+
+*.tmp.txt
