@@ -6,6 +6,8 @@
         "outFile": "app/js/bin/site.js"
     },
     "exclude": [
-        "node_modules"
+        "node_modules",
+        "bower_components",
+        ".c9"
     ]
 }
