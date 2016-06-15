@@ -1,16 +1,25 @@
 module.exports = function (grunt) {
     grunt.initConfig({
         connect: {
-            options: {
-                port: 1337,
-                livereload: 35729,
-                hostname: 'localhost'
-            },
-            livereload: {
+            localdev: {
                 options: {
-                    open: true,
-                    base: 'app'
+                    port: 1337,
+                    livereload: 35729,
+                    hostname: 'localhost'
+                },
+                livereload: {
+                    options: {
+                        open: true,
+                        base: 'app'
+                    }
                 }
+            },
+            clouddev: {
+                options: {
+                    port: 8080,
+                    livereload: 35729,
+                    hostname: '0.0.0.0'
+                },
             }
         },
         watch: {
@@ -49,13 +58,21 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-watch');
     
-    grunt.registerTask('server', function () {
+    grunt.registerTask('localserver', function () {
         grunt.task.run([
-            'connect:livereload',
+            'connect:localdev:livereload',
+            'watch'
+        ]);
+    });
+
+    grunt.registerTask('cloudserver', function () {
+        grunt.task.run([
+            'connect:clouddev',
             'watch'
         ]);
     });
     
-    grunt.registerTask("default", ['bowercopy', 'ts', 'server']);
+    grunt.registerTask("default", ['bowercopy', 'ts', 'localserver']);
+    grunt.registerTask("cloud", ['bowercopy', 'ts', 'cloudserver']);
     grunt.registerTask("nobower", ['ts', 'server']);
 };
