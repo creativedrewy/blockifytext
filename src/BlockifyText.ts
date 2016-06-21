@@ -21,13 +21,12 @@ export class BlockifyText {
         this.sceneMain = new _three.Scene();
 
         this.cameraMain = new _three.PerspectiveCamera(75, this.width / this.height, 1, 10000);
-        //this.cameraMain.position.z = 1000;
         this.cameraMain.position.z = 250;
-        this.cameraMain.lookAt(new _three.Vector3(0, 0, 0))
         this.rendererMain = new _three.WebGLRenderer({ 
-            antialias: true, 
+            antialias: true,
             // alpha: true
         });
+        this.rendererMain.shadowMapEnabled = true;
         this.rendererMain.setSize(this.width, this.height);
         document.body.appendChild(this.rendererMain.domElement);
         
@@ -59,27 +58,20 @@ export class BlockifyText {
     }
 
     setupLights() {
-        var topLeft = new _three.SpotLight(0xaaaaaa, 1.5, 0.0, Math.PI / 6, 1, 2)
-        topLeft.position.set(-600, 600, 400);
+        this.sceneMain.add(new _three.AmbientLight(0xffffff, 0.7))
+
+        var topLeft = new _three.PointLight(0xaaaaaa, 0.4);
+        topLeft.position.set(-250, 150, 100);
         topLeft.castShadow = true;
-        topLeft.shadow.mapSize.width = 1024;
-        topLeft.shadow.mapSize.height = 1024;
+        topLeft.shadowMapWidth = 2048;
+        topLeft.shadowMapHeight = 2048;
         this.sceneMain.add(topLeft);
-        this.sceneMain.add(new _three.SpotLightHelper(topLeft, 30, 200));
 
-        var topRight = new _three.SpotLight(0xaaaaaa, 1.0, 0.0, Math.PI / 6, 1, 2)
-        topRight.position.set(600, 600, 400);
-        topRight.castShadow = true;
-        topRight.shadow.mapSize.width = 1024;
-        topRight.shadow.mapSize.height = 1024;
-        this.sceneMain.add(topRight);
-        this.sceneMain.add(new _three.SpotLightHelper(topRight, 30, 200));
-
-        var bottomCenter = new _three.PointLight(0xaaaaaa, 1.0);
-        bottomCenter.position.set(0, -50, 40);
+        var bottomCenter = new _three.PointLight(0xaaaaaa, 0.4);
+        bottomCenter.position.set(0, -125, 150);
         bottomCenter.castShadow = true;
-        bottomCenter.shadow.mapSize.width = 1024;
-        bottomCenter.shadow.mapSize.height = 1024;
+        bottomCenter.shadowMapHeight = 2048;
+        bottomCenter.shadowMapWidth = 2048;
         this.sceneMain.add(bottomCenter);
     }
 
