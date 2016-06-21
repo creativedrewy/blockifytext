@@ -34,8 +34,8 @@ export class Block3dFontService {
             for (var j = 0; j < letter3d.blockWidth; j++) {
                 if (letter3d.getBlockSrc(i, j) == 1) {
                     var pxBlock = new Block1x1(color);
-                    pxBlock.position.x = j * 10;
-                    pxBlock.position.y = (letter3d.pxHeight / 2) - (i * 10);
+                    pxBlock.position.x = j * Block1x1.blockDimension;
+                    pxBlock.position.y = (letter3d.pxHeight / 2) - (i * Block1x1.blockDimension);
 
                     letter3d.addBlock(pxBlock)
                 }

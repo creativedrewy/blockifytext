@@ -11,8 +11,8 @@ export class Letter3d extends _three.Object3D {
     public get blockWidth(): number { return this.propsData.w; }
     public get blockHeight(): number { return this.propsData.px.length; }
 
-    public get pxWidth(): number { return this.blockWidth * 10; }
-    public get pxHeight(): number { return this.blockHeight * 10; }
+    public get pxWidth(): number { return this.blockWidth * Block1x1.blockDimension; }
+    public get pxHeight(): number { return this.blockHeight * Block1x1.blockDimension; }
 
     /**
      * Get the source data for a single position in the letter source data 
