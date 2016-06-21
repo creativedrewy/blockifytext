@@ -21,9 +21,13 @@ export class BlockifyText {
         this.sceneMain = new _three.Scene();
 
         this.cameraMain = new _three.PerspectiveCamera(75, this.width / this.height, 1, 10000);
-        this.cameraMain.position.z = 100;
+        //this.cameraMain.position.z = 1000;
+        this.cameraMain.position.z = 250;
         this.cameraMain.lookAt(new _three.Vector3(0, 0, 0))
-        this.rendererMain = new _three.WebGLRenderer({ antialias: true });
+        this.rendererMain = new _three.WebGLRenderer({ 
+            antialias: true, 
+            // alpha: true
+        });
         this.rendererMain.setSize(this.width, this.height);
         document.body.appendChild(this.rendererMain.domElement);
         
@@ -33,10 +37,10 @@ export class BlockifyText {
 
         fontService.loadFontData(BlockifyText.FONT_04b25)
             .subscribe((result) => {
-                this.wordMain = fontService.generate3dWord("a");
+                this.wordMain = fontService.generate3dWord("creativedrewy");
                 this.sceneMain.add(this.wordMain);
 
-                //this.animateWord();
+                this.animateWord();
             });
     }
 
@@ -55,37 +59,28 @@ export class BlockifyText {
     }
 
     setupLights() {
-        var light1 = new _three.PointLight(0xffffff, 1.0);
-        light1.position.set(40, 100, 75);
-        //light1.castShadow = true;
-        this.sceneMain.add(light1);
+        var topLeft = new _three.SpotLight(0xaaaaaa, 1.5, 0.0, Math.PI / 6, 1, 2)
+        topLeft.position.set(-600, 600, 400);
+        topLeft.castShadow = true;
+        topLeft.shadow.mapSize.width = 1024;
+        topLeft.shadow.mapSize.height = 1024;
+        this.sceneMain.add(topLeft);
+        this.sceneMain.add(new _three.SpotLightHelper(topLeft, 30, 200));
 
-        var lightTest = new _three.PointLight(0xffffff, 1.0)
-        lightTest.position.set(0, 0, 0)
-        light1.castShadow = true;
-        this.sceneMain.add(lightTest)
+        var topRight = new _three.SpotLight(0xaaaaaa, 1.0, 0.0, Math.PI / 6, 1, 2)
+        topRight.position.set(600, 600, 400);
+        topRight.castShadow = true;
+        topRight.shadow.mapSize.width = 1024;
+        topRight.shadow.mapSize.height = 1024;
+        this.sceneMain.add(topRight);
+        this.sceneMain.add(new _three.SpotLightHelper(topRight, 30, 200));
 
-        //var light2 = new _three.DirectionalLight(0xffffff, 1.0);
-        //light2.position.set(0, 0, 400);
-        //light2.castShadow = true;
-        //this.sceneMain.add(light2);
-
-        // var light3 = new _three.PointLight(0xffffff, 1.0);
-        // light3.position.set(-600, -400, 300);
-        // light3.castShadow = true;
-        // this.sceneMain.add(light3);
-
-        // var light4 = new _three.PointLight(0xffffff, 1.0);
-        // light4.position.set(-600, 400, 300);
-        // light4.castShadow = true;
-        // this.sceneMain.add(light4);
-
-        this.sceneMain.add(new _three.PointLightHelper(light1, 30));
-        this.sceneMain.add(new _three.PointLightHelper(lightTest, 10));
-        //this.sceneMain.add(new _three.PointLightHelper(lightTest, 30));
-        // this.sceneMain.add(new _three.PointLightHelper(light2, 30));
-        // this.sceneMain.add(new _three.PointLightHelper(light3, 30));
-        // this.sceneMain.add(new _three.PointLightHelper(light4, 30));
+        var bottomCenter = new _three.PointLight(0xaaaaaa, 1.0);
+        bottomCenter.position.set(0, -50, 40);
+        bottomCenter.castShadow = true;
+        bottomCenter.shadow.mapSize.width = 1024;
+        bottomCenter.shadow.mapSize.height = 1024;
+        this.sceneMain.add(bottomCenter);
     }
 
     run() {
