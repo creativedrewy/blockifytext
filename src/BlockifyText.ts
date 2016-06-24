@@ -70,17 +70,18 @@ export class BlockifyText {
         this.sceneMain.add(topLeft);
 
         var bottomCenter = new _three.PointLight(0xaaaaaa, 0.4);
-        bottomCenter.position.set(0, -150, 150);
+        bottomCenter.position.set(0, -150, 125);
         bottomCenter.castShadow = true;
         bottomCenter.shadowMapHeight = 2048;
         bottomCenter.shadowMapWidth = 2048;
         this.sceneMain.add(bottomCenter);
 
-        var topRight = new _three.PointLight(0xaaaaaa, 0.4)
-        topRight.position.set(250, 0, 300);
-        // bottomCenter.castShadow = true;
-        // bottomCenter.shadowMapHeight = 2048;
-        // bottomCenter.shadowMapWidth = 2048;
+        var topRight = new _three.PointLight(0xaaaaaa, 0.3)
+        topRight.position.set(300, 75, 150);
+        topRight.castShadow = true;
+        topRight.shadowMapHeight = 2048;
+        topRight.shadowMapWidth = 2048;
+        this.sceneMain.add(topRight);
     }
 
     run() {
