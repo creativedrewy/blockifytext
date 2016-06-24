@@ -2,6 +2,7 @@ import * as _three from 'three';
 import {Observable} from 'rx';
 import {Block1x1} from '../mesh/Block1x1'
 import {Letter3d} from '../object3d/Letter3d'
+import {Sequence3d} from '../object3d/Sequence3d'
 
 /**
  * Encapsulates business logic related to a 3d font
@@ -48,11 +49,11 @@ export class Block3dFontService {
     /**
      * Generate a 3d string with all of the 3d letters as one object
      */
-    generate3dWord(text: string): _three.Object3D {
+    generate3dWord(text: string): Sequence3d {
         var letterSpacing = 10;
         var spaceCharWidth = 50;
         var wordWidth = 0;
-        var textContainer = new _three.Object3D();
+        var textContainer = new Sequence3d();
 
         Observable.from(text).forEach(letter => { wordWidth += this.generate3dLetter(letter).pxWidth + letterSpacing; });
 
@@ -67,7 +68,7 @@ export class Block3dFontService {
 
                 var current3dLetter = this.generate3dLetter(letterChar, this.blockColors[colorIndex]);
                 current3dLetter.position.x = xOffset;
-                textContainer.add(current3dLetter);
+                textContainer.addToSequence(current3dLetter);
 
                 xOffset += current3dLetter.pxWidth + letterSpacing;
             }
