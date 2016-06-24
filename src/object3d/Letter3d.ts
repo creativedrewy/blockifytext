@@ -8,6 +8,8 @@ export class Letter3d extends _three.Object3D {
     private propsData: any;
     private letterBlocks: Array<Block1x1>;
     
+    public get blocks(): Array<Block1x1> { return this.letterBlocks; }
+
     public get blockWidth(): number { return this.propsData.w; }
     public get blockHeight(): number { return this.propsData.px.length; }
 

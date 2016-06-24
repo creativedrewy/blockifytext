@@ -1,7 +1,8 @@
 import * as _three from 'three';
 import {Observable} from 'rx';
 import {Block1x1} from 'mesh/Block1x1'
-import {Block3dFontService} from 'service/Block3dFontService' 
+import {Block3dFontService} from 'service/Block3dFontService'
+import {Sequence3d} from 'object3d/Sequence3d' 
 
 /**
  * Main class for application
@@ -15,7 +16,7 @@ export class BlockifyText {
     private rendererMain: _three.WebGLRenderer;
     private sceneMain: _three.Scene;
     private cameraMain: _three.Camera;
-    private wordMain: _three.Object3D;
+    private wordMain: Sequence3d;
 
     constructor() {
         this.sceneMain = new _three.Scene();
@@ -40,6 +41,16 @@ export class BlockifyText {
             .subscribe((result) => {
                 this.wordMain = fontService.generate3dWord("creativedrewy");
                 this.sceneMain.add(this.wordMain);
+
+                this.wordMain.sequence.forEach((letter3d) => {
+                    var startDelay = 0;
+                    
+                    letter3d.blocks.forEach((block) => {
+                        startDelay += .05;
+
+                        TweenMax.to(block.position, 3, { z: 500, ease: Quad.easeInOut, delay: startDelay, yoyo: true, repeat: 1 });
+                    })
+                })
 
                 this.animateWord();
             });
