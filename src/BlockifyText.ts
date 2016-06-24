@@ -22,11 +22,13 @@ export class BlockifyText {
 
         this.cameraMain = new _three.PerspectiveCamera(75, this.width / this.height, 1, 10000);
         this.cameraMain.position.z = 250;
+
         this.rendererMain = new _three.WebGLRenderer({ 
             antialias: true,
             // alpha: true
         });
         this.rendererMain.shadowMapEnabled = true;
+        this.rendererMain.shadowMap.type = _three.PCFSoftShadowMap;
         this.rendererMain.setSize(this.width, this.height);
         document.body.appendChild(this.rendererMain.domElement);
         
@@ -61,18 +63,24 @@ export class BlockifyText {
         this.sceneMain.add(new _three.AmbientLight(0xffffff, 0.7))
 
         var topLeft = new _three.PointLight(0xaaaaaa, 0.4);
-        topLeft.position.set(-250, 150, 100);
+        topLeft.position.set(-250, 150, 150);
         topLeft.castShadow = true;
         topLeft.shadowMapWidth = 2048;
         topLeft.shadowMapHeight = 2048;
         this.sceneMain.add(topLeft);
 
         var bottomCenter = new _three.PointLight(0xaaaaaa, 0.4);
-        bottomCenter.position.set(0, -125, 150);
+        bottomCenter.position.set(0, -150, 150);
         bottomCenter.castShadow = true;
         bottomCenter.shadowMapHeight = 2048;
         bottomCenter.shadowMapWidth = 2048;
         this.sceneMain.add(bottomCenter);
+
+        var topRight = new _three.PointLight(0xaaaaaa, 0.4)
+        topRight.position.set(250, 0, 300);
+        // bottomCenter.castShadow = true;
+        // bottomCenter.shadowMapHeight = 2048;
+        // bottomCenter.shadowMapWidth = 2048;
     }
 
     run() {
