@@ -46,11 +46,11 @@ export class BlockifyText {
     }
 
     animateWord() {
-        var animDuration = 3;
+        var animDuration = 10;
 
-        this.wordMain.rotation.x = -Math.PI / 22;
-        this.wordMain.rotation.y = -Math.PI / 40;
-        this.wordMain.rotation.z = -Math.PI / 40;
+        this.wordMain.rotation.x = -Math.PI / 30;
+        this.wordMain.rotation.y = -Math.PI / 50;
+        this.wordMain.rotation.z = -Math.PI / 50;
 
         var timeline = new TimelineMax({ repeat: -1 });
         timeline.add(TweenLite.to(this.wordMain.rotation, animDuration, { x: Math.PI / 22, z: Math.PI / 40, ease: Quad.easeInOut }));
