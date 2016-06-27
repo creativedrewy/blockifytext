@@ -23,10 +23,7 @@ export class BlockifyText {
         this.cameraMain = new _three.PerspectiveCamera(75, this.width / this.height, 1, 10000);
         this.cameraMain.position.z = 250;
 
-        this.rendererMain = new _three.WebGLRenderer({ 
-            antialias: true,
-            // alpha: true
-        });
+        this.rendererMain = new _three.WebGLRenderer({ antialias: true });
         this.rendererMain.shadowMapEnabled = true;
         this.rendererMain.shadowMap.type = _three.PCFSoftShadowMap;
         this.rendererMain.setSize(this.width, this.height);
@@ -50,19 +47,18 @@ export class BlockifyText {
 
         this.wordMain.rotation.x = -Math.PI / 30;
         this.wordMain.rotation.y = -Math.PI / 50;
-        this.wordMain.rotation.z = -Math.PI / 50;
 
         var timeline = new TimelineMax({ repeat: -1 });
-        timeline.add(TweenLite.to(this.wordMain.rotation, animDuration, { x: Math.PI / 22, z: Math.PI / 40, ease: Quad.easeInOut }));
-        timeline.add(TweenLite.to(this.wordMain.rotation, animDuration, { y: Math.PI / 40, ease: Quad.easeInOut }));
-        timeline.add(TweenLite.to(this.wordMain.rotation, animDuration, { x: -Math.PI / 22, z: -Math.PI / 40, ease: Quad.easeInOut }));
-        timeline.add(TweenLite.to(this.wordMain.rotation, animDuration, { y: -Math.PI / 40, ease: Quad.easeInOut }));
+        timeline.add(TweenLite.to(this.wordMain.rotation, animDuration, { x: Math.PI / 30, ease: Quad.easeInOut }));
+        timeline.add(TweenLite.to(this.wordMain.rotation, animDuration, { y: Math.PI / 50, ease: Quad.easeInOut }));
+        timeline.add(TweenLite.to(this.wordMain.rotation, animDuration, { x: -Math.PI / 30, ease: Quad.easeInOut }));
+        timeline.add(TweenLite.to(this.wordMain.rotation, animDuration, { y: -Math.PI / 50, ease: Quad.easeInOut }));
     }
 
     setupLights() {
-        this.sceneMain.add(new _three.AmbientLight(0xffffff, 0.7))
+        this.sceneMain.add(new _three.AmbientLight(0xaaaaaa, 0.7))
 
-        var topLeft = new _three.PointLight(0xaaaaaa, 0.4);
+        var topLeft = new _three.PointLight(0xffffff, 0.4);
         topLeft.position.set(-250, 150, 150);
         topLeft.castShadow = true;
         topLeft.shadowMapWidth = 2048;
@@ -87,6 +83,6 @@ export class BlockifyText {
     run() {
         setInterval(() => {
             this.rendererMain.render(this.sceneMain, this.cameraMain);
-        }, 50);
+        }, 33);
     }
 }
