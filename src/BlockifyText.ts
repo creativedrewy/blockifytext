@@ -17,6 +17,8 @@ export class BlockifyText {
     private cameraMain: _three.Camera;
     private wordMain: _three.Object3D;
 
+    private displayedText: string = "yourheadasplode";
+
     constructor() {
         this.sceneMain = new _three.Scene();
 
@@ -35,15 +37,31 @@ export class BlockifyText {
 
         fontService.loadFontData(BlockifyText.FONT_04b25)
             .subscribe((result) => {
-                this.wordMain = fontService.generate3dWord("creativedrewy");
+                this.wordMain = fontService.generate3dWord(this.displayedText);
                 this.sceneMain.add(this.wordMain);
 
-                this.animateWord();
+                //this.animateWord();
             });
+
+        document.body.onkeydown = (ev: KeyboardEvent) => {
+            if (ev.keyCode == 8) {
+                this.displayedText = this.displayedText.substr(0, this.displayedText.length - 1);
+                this.sceneMain.remove(this.wordMain);
+
+                this.wordMain = fontService.generate3dWord(this.displayedText);
+                this.sceneMain.add(this.wordMain);
+            } else {
+                this.sceneMain.remove(this.wordMain);
+
+                this.displayedText += ev.key.toLowerCase();
+                this.wordMain = fontService.generate3dWord(this.displayedText);
+                this.sceneMain.add(this.wordMain);
+            }
+        }
     }
 
     animateWord() {
-        var animDuration = 10;
+        var animDuration = 5;
 
         this.wordMain.rotation.x = -Math.PI / 30;
         this.wordMain.rotation.y = -Math.PI / 50;
