@@ -47,7 +47,7 @@ export class BlockifyText {
             if (ev.keyCode == 8) {
                 this.mainPhrase.deleteLastLetter();
             } else {
-                this.mainPhrase.appendLetter(ev.key);
+                this.mainPhrase.appendLetter(ev.key.toLowerCase());
             }
         }
 

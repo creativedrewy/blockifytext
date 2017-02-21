@@ -20,13 +20,17 @@ export class WordBuilder extends _three.Object3D {
     }
 
     appendLetter(letter: string) {
-        var newLetter = this.fontService.generate3dLetter(letter);
-        this.add(newLetter);
+        var colorIndex = Math.round((Math.random() * this.fontService.blockColors.length - 1));
 
-        this.letterStash.push(newLetter);
-        this.totalWidth += newLetter.pxWidth + this.letterSpacing;
+        var newLetter = this.fontService.generate3dLetter(letter, this.fontService.blockColors[colorIndex]);
+        if (newLetter) {
+            this.add(newLetter);
 
-        this.positionLetters();
+            this.letterStash.push(newLetter);
+            this.totalWidth += newLetter.pxWidth + this.letterSpacing;
+
+            this.positionLetters();
+        }
     }
 
     deleteLastLetter() {

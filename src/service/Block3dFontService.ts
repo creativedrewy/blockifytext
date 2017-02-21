@@ -7,8 +7,9 @@ import {Letter3d} from '../object3d/Letter3d'
  * Encapsulates business logic related to a 3d font
  */
 export class Block3dFontService { 
+    public blockColors: Array<number> = [ 0xfec400, 0xe76318, 0xde000d, 0xde378b, 0x0057a8, 0xffff99, 0xee9ec4, 0x87c0ea, 0xf49b00, 0x9c006b, 0x478cc6 ];
+
     private letterData: any;
-    private blockColors: Array<number> = [ 0xfec400, 0xe76318, 0xde000d, 0xde378b, 0x0057a8, 0xffff99, 0xee9ec4, 0x87c0ea, 0xf49b00, 0x9c006b, 0x478cc6 ];
 
     /**
      * Load the source data for a font
@@ -31,8 +32,9 @@ export class Block3dFontService {
         if (letter == " ") {
             var letter3d = new SpaceChar3d();
         } else {
+            if (Object.keys(this.letterData).indexOf(letter) == -1) return null;
+
             var letter3d = new Letter3d(this.letterData[letter]);
-        
             var letterDisp = "";
             for (var i = 0; i < letter3d.blockHeight; i++) {
                 for (var j = 0; j < letter3d.blockWidth; j++) {
@@ -49,36 +51,4 @@ export class Block3dFontService {
 
         return letter3d;
     }
-
-    /**
-     * Generate a 3d string with all of the 3d letters as one object
-     */
-    generate3dWord(text: string): _three.Object3D {
-        var letterSpacing = 10;
-        var spaceCharWidth = 50;
-        var wordWidth = 0;
-        var textContainer = new _three.Object3D();
-
-        //Observable.from(text).forEach(letter => { wordWidth += this.generate3dLetter(letter).pxWidth + letterSpacing; });
-
-        var xOffset = -(wordWidth / 2);
-        for (var i = 0; i < text.length; i++) {
-            var letterChar = text[i];
-
-            if (letterChar == " ") {
-                xOffset += spaceCharWidth + letterSpacing;
-            } else {
-                var colorIndex = Math.round((Math.random() * this.blockColors.length - 1));
-
-                var current3dLetter = this.generate3dLetter(letterChar, this.blockColors[colorIndex]);
-                current3dLetter.position.x = xOffset;
-                textContainer.add(current3dLetter);
-
-                xOffset += current3dLetter.pxWidth + letterSpacing;
-            }
-        }
-
-        return textContainer;
-    }
-
 }
