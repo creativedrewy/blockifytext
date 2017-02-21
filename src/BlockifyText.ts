@@ -15,7 +15,7 @@ export class BlockifyText {
     private rendererMain: _three.WebGLRenderer;
     private sceneMain: _three.Scene;
     private cameraMain: _three.Camera;
-    private wordMain: _three.Object3D;
+    private mainPhrase: WordBuilder;
 
     constructor() {
         this.sceneMain = new _three.Scene();
@@ -33,33 +33,54 @@ export class BlockifyText {
         this.setupTextInteractions();
     }
 
+    /**
+     * Prepare the main phrase object and setup for typing
+     */
     async setupTextInteractions() {
         var fontService = new Block3dFontService();
-        var wordBuilder = new WordBuilder(fontService);
+        this.mainPhrase = new WordBuilder(fontService);
 
         await fontService.loadFontData(BlockifyText.FONT_04b25);
-        this.sceneMain.add(wordBuilder);
+        this.sceneMain.add(this.mainPhrase);
 
         document.body.onkeydown = (ev: KeyboardEvent) => {
             if (ev.keyCode == 8) {
-                wordBuilder.deleteLastLetter();
+                this.mainPhrase.deleteLastLetter();
             } else {
-                wordBuilder.appendLetter(ev.key);
+                this.mainPhrase.appendLetter(ev.key);
             }
         }
+
+        this.animateMainPhrase();
+        this.typeFirstPhrase();
     }
 
-    animateWord() {
+    /**
+     * Setup a subtle main phrase animation
+     */
+    animateMainPhrase() {
         var animDuration = 5;
 
-        this.wordMain.rotation.x = -Math.PI / 30;
-        this.wordMain.rotation.y = -Math.PI / 50;
+        this.mainPhrase.rotation.x = -Math.PI / 30;
+        this.mainPhrase.rotation.y = -Math.PI / 50;
 
         var timeline = new TimelineMax({ repeat: -1 });
-        timeline.add(TweenLite.to(this.wordMain.rotation, animDuration, { x: Math.PI / 30, ease: Quad.easeInOut }));
-        timeline.add(TweenLite.to(this.wordMain.rotation, animDuration, { y: Math.PI / 50, ease: Quad.easeInOut }));
-        timeline.add(TweenLite.to(this.wordMain.rotation, animDuration, { x: -Math.PI / 30, ease: Quad.easeInOut }));
-        timeline.add(TweenLite.to(this.wordMain.rotation, animDuration, { y: -Math.PI / 50, ease: Quad.easeInOut }));
+        timeline.add(TweenLite.to(this.mainPhrase.rotation, animDuration, { x: Math.PI / 30, ease: Quad.easeInOut }));
+        timeline.add(TweenLite.to(this.mainPhrase.rotation, animDuration, { y: Math.PI / 50, ease: Quad.easeInOut }));
+        timeline.add(TweenLite.to(this.mainPhrase.rotation, animDuration, { x: -Math.PI / 30, ease: Quad.easeInOut }));
+        timeline.add(TweenLite.to(this.mainPhrase.rotation, animDuration, { y: -Math.PI / 50, ease: Quad.easeInOut }));
+    }
+
+    /**
+     * "Type in" an initial phrase to the scene
+     */
+    async typeFirstPhrase() {
+        var firstWord = "type here";
+
+        for (var i = 0; i < firstWord.length; i++) {
+            this.mainPhrase.appendLetter(firstWord[i]);
+            await new Promise<void>(resolve => setTimeout(resolve, 200));
+        }
     }
 
     setupLights() {
