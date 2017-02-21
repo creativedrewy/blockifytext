@@ -17,8 +17,6 @@ export class BlockifyText {
     private cameraMain: _three.Camera;
     private wordMain: _three.Object3D;
 
-    private displayedText: string = "yourheadasplode";
-
     constructor() {
         this.sceneMain = new _three.Scene();
 

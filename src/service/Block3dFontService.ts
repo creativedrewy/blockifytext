@@ -1,3 +1,4 @@
+import { SpaceChar3d } from '../object3d/SpaceChar3d';
 import * as _three from 'three';
 import {Block1x1} from '../mesh/Block1x1'
 import {Letter3d} from '../object3d/Letter3d'
@@ -27,17 +28,21 @@ export class Block3dFontService {
      * Generate a 3d letter with all component blocks
      */
     generate3dLetter(letter: string, color: number = 0xff0000): Letter3d {
-        var letter3d = new Letter3d(this.letterData[letter]);
+        if (letter == " ") {
+            var letter3d = new SpaceChar3d();
+        } else {
+            var letter3d = new Letter3d(this.letterData[letter]);
         
-        var letterDisp = "";
-        for (var i = 0; i < letter3d.blockHeight; i++) {
-            for (var j = 0; j < letter3d.blockWidth; j++) {
-                if (letter3d.getBlockSrc(i, j) == 1) {
-                    var pxBlock = new Block1x1(color);
-                    pxBlock.position.x = j * Block1x1.blockDimension;
-                    pxBlock.position.y = (letter3d.pxHeight / 2) - (i * Block1x1.blockDimension);
+            var letterDisp = "";
+            for (var i = 0; i < letter3d.blockHeight; i++) {
+                for (var j = 0; j < letter3d.blockWidth; j++) {
+                    if (letter3d.getBlockSrc(i, j) == 1) {
+                        var pxBlock = new Block1x1(color);
+                        pxBlock.position.x = j * Block1x1.blockDimension;
+                        pxBlock.position.y = (letter3d.pxHeight / 2) - (i * Block1x1.blockDimension);
 
-                    letter3d.addBlock(pxBlock)
+                        letter3d.addBlock(pxBlock)
+                    }
                 }
             }
         }
