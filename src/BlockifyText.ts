@@ -40,8 +40,7 @@ export class BlockifyText {
         var wordBuilder = new WordBuilder(fontService);
 
         await fontService.loadFontData(BlockifyText.FONT_04b25);
-        //this.wordMain = fontService.generate3dWord(this.displayedText);
-        //this.sceneMain.add(this.wordMain);
+        this.sceneMain.add(wordBuilder);
 
         document.body.onkeydown = (ev: KeyboardEvent) => {
             if (ev.keyCode == 8) {
