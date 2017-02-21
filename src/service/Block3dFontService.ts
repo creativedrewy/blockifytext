@@ -1,5 +1,4 @@
 import * as _three from 'three';
-import {Observable} from 'rx';
 import {Block1x1} from '../mesh/Block1x1'
 import {Letter3d} from '../object3d/Letter3d'
 
@@ -13,12 +12,13 @@ export class Block3dFontService {
     /**
      * Load the source data for a font
      */
-    loadFontData(fontJson: string): Observable<boolean> {
-        return Observable.create<boolean>((subscriber) => {
+    loadFontData(fontJson: string): Promise<boolean> {
+        return new Promise<boolean>(resolve => {
             var fontLoader = new _three.XHRLoader(_three.DefaultLoadingManager);
             fontLoader.load(fontJson, (res) => {
                 this.letterData = JSON.parse(res);
-                subscriber.onNext(true);
+
+                resolve(true);
             });
         });
     }
@@ -54,7 +54,7 @@ export class Block3dFontService {
         var wordWidth = 0;
         var textContainer = new _three.Object3D();
 
-        Observable.from(text).forEach(letter => { wordWidth += this.generate3dLetter(letter).pxWidth + letterSpacing; });
+        //Observable.from(text).forEach(letter => { wordWidth += this.generate3dLetter(letter).pxWidth + letterSpacing; });
 
         var xOffset = -(wordWidth / 2);
         for (var i = 0; i < text.length; i++) {

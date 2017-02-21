@@ -8,12 +8,14 @@
   "devDependencies": {
     "grunt": "^1.0.1",
     "grunt-contrib-connect": "^1.0.2",
-    "grunt-contrib-watch": "^1.0.0"
+    "grunt-contrib-watch": "^1.0.0",
+    "typescript": "^2.1.6"
   },
   "dependencies": {
     "grunt": "^1.0.1",
     "grunt-bowercopy": "^1.2.4",
-    "grunt-ts": "^5.5.1",
-    "rx": "^4.1.0"
+    "grunt-ts": "^6.0.0-beta.11",
+    "types": "^0.1.1",
+    "typescript": "^2.1.6"
   }
 }

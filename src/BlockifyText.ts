@@ -1,5 +1,4 @@
 import * as _three from 'three';
-import {Observable} from 'rx';
 import {Block1x1} from 'mesh/Block1x1'
 import {Block3dFontService} from 'service/Block3dFontService' 
 
@@ -32,30 +31,21 @@ export class BlockifyText {
         document.body.appendChild(this.rendererMain.domElement);
         
         this.setupLights();
+        this.setupTextInteractions();
+    }
 
+    async setupTextInteractions() {
         var fontService = new Block3dFontService();
 
-        fontService.loadFontData(BlockifyText.FONT_04b25)
-            .subscribe((result) => {
-                this.wordMain = fontService.generate3dWord(this.displayedText);
-                this.sceneMain.add(this.wordMain);
-
-                //this.animateWord();
-            });
+        await fontService.loadFontData(BlockifyText.FONT_04b25);
+        this.wordMain = fontService.generate3dWord(this.displayedText);
+        this.sceneMain.add(this.wordMain);
 
         document.body.onkeydown = (ev: KeyboardEvent) => {
             if (ev.keyCode == 8) {
-                this.displayedText = this.displayedText.substr(0, this.displayedText.length - 1);
-                this.sceneMain.remove(this.wordMain);
-
-                this.wordMain = fontService.generate3dWord(this.displayedText);
-                this.sceneMain.add(this.wordMain);
+                
             } else {
-                this.sceneMain.remove(this.wordMain);
-
-                this.displayedText += ev.key.toLowerCase();
-                this.wordMain = fontService.generate3dWord(this.displayedText);
-                this.sceneMain.add(this.wordMain);
+                
             }
         }
     }
