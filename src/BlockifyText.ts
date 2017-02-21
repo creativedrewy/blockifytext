@@ -1,3 +1,4 @@
+import { WordBuilder } from './object3d/WordBuilder';
 import * as _three from 'three';
 import {Block1x1} from 'mesh/Block1x1'
 import {Block3dFontService} from 'service/Block3dFontService' 
@@ -36,16 +37,17 @@ export class BlockifyText {
 
     async setupTextInteractions() {
         var fontService = new Block3dFontService();
+        var wordBuilder = new WordBuilder(fontService);
 
         await fontService.loadFontData(BlockifyText.FONT_04b25);
-        this.wordMain = fontService.generate3dWord(this.displayedText);
-        this.sceneMain.add(this.wordMain);
+        //this.wordMain = fontService.generate3dWord(this.displayedText);
+        //this.sceneMain.add(this.wordMain);
 
         document.body.onkeydown = (ev: KeyboardEvent) => {
             if (ev.keyCode == 8) {
-                
+                wordBuilder.deleteLastLetter();
             } else {
-                
+                wordBuilder.appendLetter(ev.key);
             }
         }
     }
