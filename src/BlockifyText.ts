@@ -72,10 +72,18 @@ export class BlockifyText {
     }
 
     /**
-     * "Type in" an initial phrase to the scene
+     * "Type in" an initial phrase to the scene, possible using any text passed in to the query string
      */
     async typeFirstPhrase() {
         var firstWord = "type here";
+        var textPrefx = "?text=";
+
+        if (window.location.search.startsWith(textPrefx)) {
+            var fullSearch = window.location.search;
+            var text = fullSearch.substr(textPrefx.length);
+
+            if (text.length > 0) firstWord = text.split("%20").join(" ");
+        }
 
         for (var i = 0; i < firstWord.length; i++) {
             this.mainPhrase.appendLetter(firstWord[i]);
