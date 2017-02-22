@@ -4,10 +4,6 @@ Type out some 3D text that looks like it was built out of Legos™! Marvel at th
 
 I made this as a banner for some Twitch live streaming I was doing. You can use it too! Just head to the link at the top of the repo and type out your text. Then you can mask the appropriate region using whatever streaming software you're using. Win!
 
-#### Known Issues
-
-As of this writing WebGL doesn't want to load on FireFox. Could be due to the version of Three.js I'm using but I'm not sure. For now just run it in Chrome.
-
 ### Building Yourself
 
 Source code is client-side Typescript. After cloning:
