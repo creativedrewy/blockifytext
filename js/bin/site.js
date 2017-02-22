@@ -1,8 +1,13 @@
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -40,6 +45,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 define("mesh/Block1x1", ["require", "exports", "three"], function (require, exports, _three) {
     "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
     var Block1x1 = (function (_super) {
         __extends(Block1x1, _super);
         function Block1x1(blockColor) {
@@ -69,6 +75,7 @@ define("mesh/Block1x1", ["require", "exports", "three"], function (require, expo
 });
 define("object3d/Letter3d", ["require", "exports", "three", "mesh/Block1x1"], function (require, exports, _three, Block1x1_1) {
     "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
     var Letter3d = (function (_super) {
         __extends(Letter3d, _super);
         function Letter3d(letterProps) {
@@ -110,6 +117,7 @@ define("object3d/Letter3d", ["require", "exports", "three", "mesh/Block1x1"], fu
 });
 define("object3d/SpaceChar3d", ["require", "exports", "object3d/Letter3d"], function (require, exports, Letter3d_1) {
     "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
     var SpaceChar3d = (function (_super) {
         __extends(SpaceChar3d, _super);
         function SpaceChar3d() {
@@ -126,6 +134,7 @@ define("object3d/SpaceChar3d", ["require", "exports", "object3d/Letter3d"], func
 });
 define("service/Block3dFontService", ["require", "exports", "object3d/SpaceChar3d", "three", "mesh/Block1x1", "object3d/Letter3d"], function (require, exports, SpaceChar3d_1, _three, Block1x1_2, Letter3d_2) {
     "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
     var Block3dFontService = (function () {
         function Block3dFontService() {
             this.blockColors = [0xfec400, 0xe76318, 0xde000d, 0xde378b, 0x0057a8, 0xffff99, 0xee9ec4, 0x87c0ea, 0xf49b00, 0x9c006b, 0x478cc6];
@@ -169,6 +178,7 @@ define("service/Block3dFontService", ["require", "exports", "object3d/SpaceChar3
 });
 define("object3d/WordBuilder", ["require", "exports", "three"], function (require, exports, _three) {
     "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
     var WordBuilder = (function (_super) {
         __extends(WordBuilder, _super);
         function WordBuilder(svc) {
@@ -211,6 +221,7 @@ define("object3d/WordBuilder", ["require", "exports", "three"], function (requir
 });
 define("BlockifyText", ["require", "exports", "object3d/WordBuilder", "three", "service/Block3dFontService"], function (require, exports, WordBuilder_1, _three, Block3dFontService_1) {
     "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
     var BlockifyText = (function () {
         function BlockifyText() {
             this.width = 900;
@@ -266,11 +277,18 @@ define("BlockifyText", ["require", "exports", "object3d/WordBuilder", "three", "
         };
         BlockifyText.prototype.typeFirstPhrase = function () {
             return __awaiter(this, void 0, void 0, function () {
-                var firstWord, i;
+                var firstWord, textPrefx, fullSearch, text, i;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
                             firstWord = "type here";
+                            textPrefx = "?text=";
+                            if (window.location.search.startsWith(textPrefx)) {
+                                fullSearch = window.location.search;
+                                text = fullSearch.substr(textPrefx.length);
+                                if (text.length > 0)
+                                    firstWord = text.split("%20").join(" ");
+                            }
                             i = 0;
                             _a.label = 1;
                         case 1:
