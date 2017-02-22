@@ -5,3 +5,4 @@ app/js/vendor
 bower_components/
 
 *.tmp.txt
+.idea/
