@@ -20,6 +20,6 @@ Grunt will provide you with a temporary local web server.
 
 ### Credits
 
-The pixel font is "04B-25" and was originally downloaded from (http://www.04.jp.org)[http://www.04.jp.org]. 
+The pixel font is "04B-25" and was originally downloaded from (http://www.04.jp.org).
 
-In order to use it in the code I wrote an image parser. It took an image of all the letters typed out and converted it into a JSON file that you can see (here)[https://github.com/creativedrewy/blockifytext/blob/master/app/assets/04b25_font.json]. That JSON file is loaded in at runtime and used to render the text blocks.
+In order to use it in the code I wrote an image parser. It took an image of all the letters typed out and converted it into a JSON file that you can see [here](https://github.com/creativedrewy/blockifytext/blob/master/app/assets/04b25_font.json). That JSON file is loaded in at runtime and used to render the text blocks.
